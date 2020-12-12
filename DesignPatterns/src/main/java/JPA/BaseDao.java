@@ -59,10 +59,10 @@ public class BaseDao<T> {
 
         // 获得bean字段的值（要插入的记录）
         ArrayList<Object> paramsList = new ArrayList<>();
-        for (int i=0; i<fields.length; i++) {
+        for (Field field : fields) {
             try {
-                fields[i].setAccessible(true);
-                Object o = fields[i].get(bean);
+                field.setAccessible(true);
+                Object o = field.get(bean);
                 paramsList.add(o);
             } catch (IllegalAccessException e) {
                 e.printStackTrace();

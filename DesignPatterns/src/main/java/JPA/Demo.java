@@ -3,7 +3,7 @@ package JPA;
 /**
  * 这是一个基础demo，用来理解this关键字
  * 这是一个非常重要的知识点，灵感来源于：https://zhuanlan.zhihu.com/p/111804664
- * 里面提到this可以与python中方法的第一个参数this相类比，这个思路是非常好的
+ * 里面提到this可以与python中方法的第一个参数self相类比，这个思路是非常好的
  * 同时将构造器（构造方法）理解为特殊的**方法**最好，调用一个实例方法或者构造器，其实都会隐式传递调用者实例对象：this
  */
 public class Demo {
@@ -16,11 +16,11 @@ public class Demo {
 class A <T>{
     public A(){
         /*这里有一个我以前从来没意识到的知识点，这里的this其实是一个连续传递的对象参数，和python的self很像*/
-        Class clazz = this.getClass();
+        Class<?> clazz = this.getClass();
         System.out.println(clazz);
     }
     void func(){
-        System.out.println(this.getClass().getName());
+        System.out.println(this.getClass().getName());  //这里的this和构造器中的this不是同一个对象哦！
     }
 }
 

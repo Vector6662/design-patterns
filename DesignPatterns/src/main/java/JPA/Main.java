@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * 模拟实现JPA框架，这是为了练习
+ * 模拟实现JPA框架，这里还练习了泛型的使用以及对Class类及其泛型的理解
  */
 public class Main {
     public static void main(String[] args) {
