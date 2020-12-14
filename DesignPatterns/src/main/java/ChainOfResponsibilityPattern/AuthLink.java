@@ -24,6 +24,7 @@ public abstract class AuthLink {
         this.levelUserName = levelUserName;
     }
     public AuthLink next(){
+        //这里是在测试this这个知识点的，其实用抽象类来理解这个知识点方便些，毕竟抽象类是不能直接实例化的，于是这个this肯定就是指的它的实现者：子类
         System.out.println("测试一下this保留字的准确含义："+this.getClass().getName());
         return this.next;
     }

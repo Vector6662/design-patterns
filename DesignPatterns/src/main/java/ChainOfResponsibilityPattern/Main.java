@@ -14,6 +14,8 @@ import java.util.Date;
  * 责任链模式
  * 例子来源于小博哥的重学设计模式那本电子书，但我不认为这是一个很好地例子，大概是自己的段位太低，难以理解其中的奥义
  *
+ * 廖雪峰老师爹解释提供了责任链模式的另一种实现方式：https://www.liaoxuefeng.com/wiki/1252599548343744/1281319474561057
+ * 相比于本例，他多引入了一个HandlerChain类，作用是统一管理所有的节点，相当于把节点集中管理。但两种方式本质都是一样的。
  */
 public class Main {
     static Logger logger = LoggerFactory.getLogger(Main.class );
