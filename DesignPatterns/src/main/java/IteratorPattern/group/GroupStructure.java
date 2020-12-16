@@ -60,7 +60,7 @@ public class GroupStructure implements Collection<Employee, Link> {
 
     @Override
     public Iterator<Employee> iterator() {
-        // TODO: 2020/12/14 偷个懒，复习的时候来写一下
+        // TODO: 2020/12/14 偷个懒，复习的时候来写一下，实现这两个接口方法
         return new Iterator<Employee>() {
 
             @Override

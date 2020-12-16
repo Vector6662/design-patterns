@@ -24,6 +24,14 @@ public class Main {
         while (i.hasNext()) {
             System.out.println(i.next());
         }
+
+        String s = "               ";
+        int length=5;
+        length=s.length()-length;
+        System.out.println(length);
+        s = s.replaceAll(" ","%20");
+        s = s.substring(0,length);
+        System.out.println(s);
     }
 
 
