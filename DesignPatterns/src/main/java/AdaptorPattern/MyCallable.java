@@ -2,7 +2,9 @@ package AdaptorPattern;
 
 import java.nio.IntBuffer;
 import java.nio.channels.*;
+import java.util.List;
 import java.util.concurrent.Callable;
+import java.util.function.Consumer;
 
 public class MyCallable<V> implements Callable<V> {
     @Override

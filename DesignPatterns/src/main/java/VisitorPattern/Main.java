@@ -8,13 +8,25 @@ import java.util.logging.FileHandler;
  * 个人理解就是解耦，解耦的双方是数据和操作
  * 数据如果会被各种各样的业务所需要的话，就可以采用这种模式，
  * 也就是将 1.获取（产生）数据和 2.根据不同的业务场景处理数据 两个部分分离开
+ *
+ * 最后采用了函数式编程的额思想，尝试了一下，很成功！
  */
 public class Main {
     public static void main(String[] args) {
-        FileStructure f = new FileStructure(new File(Main.class.getResource("/").getPath()));
+        File file = new File(Main.class.getResource("/").getPath());
+        FileStructure f = new FileStructure(file);
         JavaFileVisitor visitor1 = new JavaFileVisitor();
         ClassFileVisitor visitor2 = new ClassFileVisitor();
         f.handle(visitor2);
+
+        //尝试使用函数式编程
+        System.out.println("================函数式编程=================");
+        f.handle(file,(i)->{
+            if (i.getName().endsWith(".class")){
+                System.out.println("found java file:"+i);
+            }
+
+        });
 
     }
 }

@@ -1,6 +1,8 @@
 package VisitorPattern;
 
 import java.io.File;
+import java.util.function.Consumer;
+import java.util.function.Function;
 
 /**
  * 一个能持有文件夹和文件的数据结构
@@ -18,6 +20,18 @@ public class FileStructure {
      */
     public void handle(Visitor visitor){
         scan(this.path,visitor);
+    }
+
+    public void handle(File file, Consumer<File> consumer){
+        if(file.isDirectory()) {
+            consumer.accept(file);
+            for (File subFile:file.listFiles()){
+                handle(subFile, consumer);
+            }
+        } else if (file.isFile()) {
+            consumer.accept(file);
+        }
+
     }
 
     /**

@@ -38,12 +38,10 @@ public class DynamicProxy2 {
         return (T) Proxy.newProxyInstance(
                 target.getClass().getClassLoader(),
                 target.getClass().getInterfaces(),
-                new InvocationHandler() {
-                    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-                        System.out.println("实现代理");
-                        System.out.println("模拟AOP");
-                        return method.invoke(target, args);
-                    }
+                (proxy, method, args) -> {
+                    System.out.println("实现代理");
+                    System.out.println("模拟AOP");
+                    return method.invoke(target, args);
                 });
     }
 
