@@ -27,7 +27,8 @@ public class DynamicProxy2 {
     // TODO: 2020/11/2 尝试使用泛型，避免强制转换。
     //  已实现，如下，但这似乎不是特别好的方式，因为newProxyInstance()可不支持泛型，它返回的只是Object对象
     /*但是这么做感觉对泛型的认识更深刻了些，你看这个泛型形参T申明了一下之后它和变量名target一样被赋值了！这是非常神奇的地方！
-    * 以前怎么没意识到？？？！！！*/
+    * 以前怎么没意识到？？？！！！
+    * 这种现象的正名叫做类型推到，记住这个名字*/
     static <T> T getProxy(final T target) {
         Object.class.getClassLoader();
 
