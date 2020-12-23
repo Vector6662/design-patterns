@@ -18,6 +18,7 @@ import org.springframework.beans.factory.FactoryBean;
  * https://bugstack.cn/itstack-demo-any/2020/01/20/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90-%E6%89%8B%E5%86%99mybait-spring%E6%A0%B8%E5%BF%83%E5%8A%9F%E8%83%BD(%E5%B9%B2%E8%B4%A7%E5%A5%BD%E6%96%87%E4%B8%80%E6%AC%A1%E5%AD%A6%E4%BC%9A%E5%B7%A5%E5%8E%82bean-%E7%B1%BB%E4%BB%A3%E7%90%86-bean%E6%B3%A8%E5%86%8C%E7%9A%84%E4%BD%BF%E7%94%A8).html
  * 其中的 2.eanDefinitionRegistryPostProcessor 类注册
  * RegisterBeanFactory类只需要关注重写父类的postProcessBeanDefinitionRegistry()和postProcessBeanFactory()方法即可
+ *
  */
 public class Main {
     static Logger logger = LoggerFactory.getLogger(Main.class);
