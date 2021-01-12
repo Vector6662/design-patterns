@@ -21,12 +21,13 @@ public class MyClassLoader extends ClassLoader {
     @Override
     public Class<?> loadClass(String name) throws ClassNotFoundException {
         /*总的逻辑是，
-        1.查找该class对象是否已经被加载；
-        2.如果没有被加载，也不是我这个自定义的类加载器加载的，那么就通过调用重写的findClass()获取此类
-        3.如果”2.“为假，则调用父类的loadClass()方法，即采用双亲委派模型来进行加载
-        （不知道这样做是傻逼原因，既然该类已经被加载了，为啥还要调用该方法再记载一次？可能是findLoadedClass()有啥幺蛾子吧，过后再研究一下）*/
+        step1.查找该class对象是否已经被加载；
+        step2.如果没有被加载，也不是我这个自定义的类加载器加载的，那么就通过调用重写的findClass()获取此类
+        step3.如果”step2.“为假，则调用父类的loadClass()方法，即采用双亲委派模型来进行加载
+        （不知道这样做是啥原因，既然该类已经被加载了，为啥还要调用该方法再加载一次？可能是findLoadedClass()有啥幺蛾子吧，过后再研究一下）*/
         Class<?> c = findLoadedClass(name);
 //        System.out.println("c = " + c);刚刚测试过，在Main方法这样的调用情形下，c永远都是为null的，一定会执行if中的语句，调用自己重写的findClass()，从磁盘中加载一个类
+        /*我现在有点觉得useMyClassLoaderLoad对象有点多余*/
         if (c==null && useMyClassLoaderLoad.contains(name)){
             //特殊的类让我自己加载，模板方法模式
             c=findClass(name);

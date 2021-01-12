@@ -3,6 +3,7 @@ package ProxyPattern;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
+import java.util.function.Consumer;
 
 /**
  * 动态代理
@@ -31,7 +32,6 @@ public class DynamicProxy2 {
     * 这种现象的正名叫做类型推到，记住这个名字*/
     static <T> T getProxy(final T target) {
         Object.class.getClassLoader();
-
 
         /*
         * 为了使得逻辑清晰，loader参数和interfaces参数都用target的

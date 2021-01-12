@@ -6,6 +6,7 @@ import net.sf.cglib.proxy.MethodInterceptor;
 /**
  * 用cglib实现动态代理
  * 该方式的关键类其实是Enhancer，而不是MethodInterceptor
+ * 这种方式实现起来更加清晰，其实就是分为三步走：1.获取Enhancer对象；2.设置enhancer对象的父类，也就是被代理对象；3.设置回调
  */
 public class Main {
     public static void main(String[] args) {
