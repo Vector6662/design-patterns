@@ -9,7 +9,10 @@ public class SearchFactory {
     public static Search newSearch(){
         Search search = null;
         ServiceLoader<Search> loader = ServiceLoader.load(Search.class);
-        for (Search value : loader) search = value;
+        for (Search value : loader){
+            System.out.println(value.getClass());
+            search = value;
+        }
         return search;
     }
-}
+}   

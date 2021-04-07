@@ -1,6 +1,5 @@
 package PrototypePattern;
 
-import com.sun.istack.internal.NotNull;
 
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;

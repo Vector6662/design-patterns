@@ -12,7 +12,7 @@ import java.util.List;
  *
  */
 public class Main {
-    private static Logger logger = LoggerFactory.getLogger(Main.class);
+    private static Logger logger = LoggerFactory.getLogger(Main.class);//提醒一个细节：参数肯定是不可以写成this.getClass()的，因为logger变量是静态的。
     private static ActivityController activityController = new ActivityController();
 
     public static void main(String[] args) throws InterruptedException {

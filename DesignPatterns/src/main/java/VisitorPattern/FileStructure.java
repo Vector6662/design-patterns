@@ -31,7 +31,6 @@ public class FileStructure {
         } else if (file.isFile()) {
             consumer.accept(file);
         }
-
     }
 
     /**

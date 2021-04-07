@@ -14,14 +14,14 @@ import java.util.logging.FileHandler;
 public class Main {
     public static void main(String[] args) {
         File file = new File(Main.class.getResource("/").getPath());
-        FileStructure f = new FileStructure(file);
+        FileStructure fs = new FileStructure(file);
         JavaFileVisitor visitor1 = new JavaFileVisitor();
         ClassFileVisitor visitor2 = new ClassFileVisitor();
-        f.handle(visitor2);
+        fs.handle(visitor2);
 
         //尝试使用函数式编程
         System.out.println("================函数式编程=================");
-        f.handle(file,(i)->{
+        fs.handle(file,(i)->{
             if (i.getName().endsWith(".class")){
                 System.out.println("found java file:"+i);
             }
