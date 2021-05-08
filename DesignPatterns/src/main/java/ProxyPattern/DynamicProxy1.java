@@ -15,18 +15,20 @@ public class DynamicProxy1 {
 
 
         /*
-        * 是不是真的第一个参数任何一个Class对象都可以？分别尝试DynamicProxy的Class对象和Calculator的Class对象，结果很例外，
+        * 是不是真的第一个参数任何一个Class对象都可以？分别尝试DynamicProxy的Class对象和Calculator的Class对象，结果很意外，
         * 居然随便定义的类Test都可以，看来醉翁之意不在酒啊，重点还是后面的interfaces可变长参数
         * 第二个参数细节请注意，接受的是可变长参数列表，可以是多个Class类型的对象（A.class, B.class），
         * 也可以是一个new Class[]{A.class, B.class}
         *
-        * 其实一个比较好的做法是这两个参数就是被代理对象本身的Loader和Interfaces，即：(target.getClass().getClassLoader, target.getInterfaces())，这样的思路清晰些
+        * 其实一个比较好的做法是这两个参数就是被代理对象本身的Loader和Interfaces，
+        * 即：(target.getClass().getClassLoader, target.getInterfaces())，这样的思路显得清晰些
         *
         * 本例是一个比较“原始”的做法，一般都是直接调用newProxyInstance()
         */
         Class<?> calculatorProxyClazz = Proxy.getProxyClass(Test.class.getClassLoader(), Calculator.class);
         System.out.println(Arrays.toString(calculatorProxyClazz.getMethods()));
         Constructor<?> constructor = calculatorProxyClazz.getConstructor(InvocationHandler.class);
+        //InvocationHandler是一个函数时接口
         Calculator calculatorProxy = (Calculator) constructor.newInstance(new InvocationHandler() {
             public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
                 System.out.println("调用了代理，这里应该写实现代理的内容");

@@ -13,6 +13,8 @@ import java.util.concurrent.*;
  * 紧接着，我发现了两者的终极适配器：FutureTask，本质上该类和Runnable、Callable地位一样，都是任务类，但是它可以接受Runnable和Callable作为参数。
  *
  * 《多线程基础》这篇文章中提到了FutureTask的继承体系请注意学习并记忆（很不幸的是这里不能粘贴图片）
+ *
+ * FutureTask应该是一个划时代的类，将结果（Furture）和任务（Task）封装到一个类中
  */
 public class Main {
     public static final Logger logger = LoggerFactory.getLogger(Main.class);
@@ -40,6 +42,7 @@ public class Main {
                 System.out.println(Thread.currentThread().getName() + "========>正在执行");
             }
         }).start();
+
 
         /*
         * 方式三：FutureTask

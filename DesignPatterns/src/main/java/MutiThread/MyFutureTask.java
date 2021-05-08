@@ -1,7 +1,6 @@
 package MutiThread;
 
 import AdaptorPattern.RunnableAdaptor;
-
 import java.util.concurrent.Callable;
 
 /**
