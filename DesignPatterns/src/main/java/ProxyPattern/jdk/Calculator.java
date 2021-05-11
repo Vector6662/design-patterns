@@ -1,4 +1,4 @@
-package ProxyPattern;
+package ProxyPattern.jdk;
 
 /**
  * 计算器接口

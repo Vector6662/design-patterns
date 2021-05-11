@@ -46,7 +46,7 @@ public class Main {
 
         /*
         * 方式三：FutureTask
-        * 这种方式其实是方式二的变体，因为FutureTask本来就是Runnable的子类
+        * 这种方式其实是方式二的变体，因为FutureTask实现了Runnable接口
         * */
         FutureTask<String> task = new FutureTask<>(new Callable<String>() {
             @Override
@@ -87,9 +87,9 @@ public class Main {
 
 
         /*
-        * 自己实现了一个简易版FutureTask，暂时没有返回值和异步
+        * 自己实现了一个简易版FutureTask，但没有返回值和异步
         * */
-        MyFutureTask<String> f = new MyFutureTask<String>(new Runnable() {
+        MyFutureTask<String> f = new MyFutureTask<>(new Runnable() {
             @Override
             public void run() {
                 System.out.println("NB!!!");

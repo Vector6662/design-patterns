@@ -1,6 +1,4 @@
-package ProxyPattern;
-
-import ProxyPattern.cglib.Student;
+package ProxyPattern.jdk;
 
 import java.lang.reflect.Proxy;
 
