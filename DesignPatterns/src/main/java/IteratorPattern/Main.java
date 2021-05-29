@@ -6,7 +6,9 @@ import java.util.List;
 
 /**
  * 迭代器模式
+ *
  */
+// TODO: 2021/5/27 我认为整个实现是存在线程安全问题的，如何优化呢？
 public class Main {
     public static void main(String[] args) {
         /**

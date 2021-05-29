@@ -8,6 +8,7 @@ import java.util.concurrent.*;
 /**
  * 学习多线程
  * 参考的系列文章：https://www.yuque.com/books/share/2b434c74-ed3a-470e-b148-b4c94ba14535/vq2ti4#kDgxl
+ *
  * 记录一个重要的发现：Thread的构造函数中是没有Callable参数的，只有Runnable，这意味着要执行Callable任务就不得不使用适配器模式
  * 同时，Runnable和Callable都是FunctionalInterface哦，可以用lambda表达式
  * 紧接着，我发现了两者的终极适配器：FutureTask，本质上该类和Runnable、Callable地位一样，都是任务类，但是它可以接受Runnable和Callable作为参数。
@@ -19,8 +20,10 @@ import java.util.concurrent.*;
 public class Main {
     public static final Logger logger = LoggerFactory.getLogger(Main.class);
 
+    /**
+     * 三种多线程的实现方式
+     */
     public static void main(String[] args) throws ExecutionException, InterruptedException {
-        //三种实现多线程的方式
 
         /*
         * 方式一：直接重写Thread的run方法。
@@ -67,7 +70,6 @@ public class Main {
 
         /*
         * 方式四：线程池
-        *
         * */
         ExecutorService executorService = Executors.newSingleThreadExecutor();
         Future<String> submit = executorService.submit(new Callable<String>() {

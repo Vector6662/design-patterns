@@ -38,6 +38,13 @@ public class CglibProxy2 {
         });
         return (T) enhancer.create();
     }
+
+    /**
+     * 感觉这种方式常用一些，因为一般都是给现有对象添加一个代理对象
+     * @param target
+     * @param <T>
+     * @return
+     */
     public static <T> T getProxy(T target){
         //step1:获取Enhancer对象
         Enhancer enhancer = new Enhancer();

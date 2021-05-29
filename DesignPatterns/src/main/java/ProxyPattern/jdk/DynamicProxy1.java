@@ -46,6 +46,8 @@ public class DynamicProxy1 {
         *
         * 这个构造器只有一个形参InvocationHandler。所以调用getConstructor()传入的参数就只能是InvocationHandler.class，
         * 没得选，而且必须填，因为它甚至没有空构造器...
+        *
+        * 区别getDeclaredConstructor()，这个构造器会返回包括非public的构造器，而getConstructor()只会返回public的构造器
         * */
         Constructor<?> constructor = calculatorProxyClazz.getConstructor(InvocationHandler.class);
         /*

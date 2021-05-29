@@ -1,11 +1,15 @@
-package MutiThread;
+package MutiThread.ThreadLocal;
 
 import java.util.HashMap;
 import java.util.Map;
 
 /**
  * ThreadLocal工具类
+ * 每个线程只用一个ThreadLocal对象来存数据
+ *
+ * 这个工具类的核心就只有一个：THREAD_CONTEXT属性，作为所有线程私有数据的唯一“钩子”，搞垄断。它不变就行，反正不同的线程通过它拿到的value不一样
  */
+
 public class ThreadLocalUtil {
     private ThreadLocalUtil(){}
     private final static ThreadLocal<Map<String,Object>> THREAD_CONTEXT = new ThreadLocal<>();
