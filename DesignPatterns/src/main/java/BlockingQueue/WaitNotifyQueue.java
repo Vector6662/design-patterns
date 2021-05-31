@@ -11,17 +11,22 @@ import java.util.LinkedList;
 public class WaitNotifyQueue<T> {
     private static final Logger logger = LoggerFactory.getLogger(WaitNotifyQueue.class);
     private LinkedList<T> queue = new LinkedList<>();
-    private int size;
+    private int capacity;
 
-    public synchronized void setSize(int size){
-        this.size=size;
+    public synchronized void setCapacity(int capacity){
+        if (capacity<=0)
+             throw new IllegalArgumentException("容量最小值为0");
+        this.capacity = capacity;
     }
 
     public synchronized void put(T resource) throws InterruptedException {
         // 注意一个关键点：此时生产者线程是拿到了对象的锁的！拿到锁之后才有资格执行这个while循环，然后试探能否插入数据到队列中
-        while (queue.size()>=size) {
+        while (queue.size()>= capacity) {
             logger.warn("队列已满，生产者不能再放入资源");
-            this.wait();//队列已满，将当前线程休眠，重新回到阻塞队列中
+            // 这里应该是阻塞整个生产者队列了，释放了CPU使用权，线程挂起。
+            // 但是要注意的是当它再次被唤醒它不会从头开始执行，而是接着这里，也就是挂起的地方继续执行！！！
+            // 这就是为什么要用while循环的原因了！还是那个如果这个线程接着此处继续执行，还是需要判断一下队列是否装满，如果仍然装满又需要再次挂起。
+            this.wait();//队列已满，将当前线程休眠，重新回到阻塞队列中LockSupport.park(this);效果一样
         }
         logger.info("生产者插入：{}",resource);
         queue.addFirst(resource);
