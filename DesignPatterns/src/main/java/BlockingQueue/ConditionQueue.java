@@ -3,10 +3,9 @@ package BlockingQueue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.swing.text.html.BlockView;
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedList;
-import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -15,7 +14,7 @@ public class ConditionQueue<T> {
 
     private LinkedList<T> queue = new LinkedList<>();
 
-    private ReentrantLock lock = new ReentrantLock();
+    private ReentrantLock lock = new ReentrantLock();// 默认非公平锁
     private Condition consumerCondition = lock.newCondition();
     private Condition producerCondition = lock.newCondition();
 
@@ -45,6 +44,8 @@ public class ConditionQueue<T> {
                 // 这里应该是阻塞整个生产者队列了，释放了CPU使用权，线程挂起。
                 // 但是要注意的是当它再次被唤醒它不会从头开始执行，而是接着这里，也就是挂起的地方继续执行！！！
                 // 这就是为什么要用while循环的原因了！还是那个如果这个线程接着此处继续执行，还是需要判断一下队列是否装满，如果仍然装满又需要再次挂起。
+                // 来翻译翻译这个await()的文档：Causes the current thread to wait until it is signalled or interrupted. 让当前线程等待，直到被signal或interrupted
+                // 其实就是将当前线程（关键：当前！！）注册到这个condition中，就可以实现选择性地signal一个condition中的线程，如果和synchronized统一起来看，synchronized相当于只有一个condition，所有的挂起线程都在里边。
                 producerCondition.await();
             }
             logger.info("生产者插入:【{}】",resource);
