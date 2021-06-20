@@ -1,6 +1,9 @@
 package HotSwap;
 
 import com.google.common.collect.Sets;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.lang.reflect.InvocationTargetException;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -10,8 +13,10 @@ import java.util.TimerTask;
  * 来源：https://zhuanlan.zhihu.com/p/54693308
  */
 public class Main {
+    private static Logger logger = LoggerFactory.getLogger(Main.class);
+
     public void printVersion(){
-        System.out.println("这是版本1哦");
+       logger.info("这是版本1哦！");
     }
 
     public static void main(String[] args) {
@@ -23,16 +28,16 @@ public class Main {
                 String className = "HotSwap.Main";
 
                 //每次都实例化一个ClassLoader，这里传入swap路径，和需要特殊加载的类名
-
-                /*卧槽我发现这里才是关键啊！！！每次都实例化一个新的ClassLoader才是最核心的部分！！！
-                * 这样的话loadClass中的findLoadedClass()方法就只会返回null，因为这个是新的ClassLoader，肯定不会有已加载的类！！！
-                * 于是一定会执行其中的if代码块，然后调用重写的findClass()，从磁盘中加载Class字节码文件。*/
-                /*补充以下Sets这个工具类，看了下源码其实Sets#newHashSet方法的参数就是该方法返回的Set对象里面的元素*/
+                /*补充一下Sets这个工具类，看了下源码其实Sets#newHashSet方法的参数就是该方法返回的Set对象里面的元素*/
                 MyClassLoader myClassLoader = new MyClassLoader(swapPath, Sets.newHashSet(className));
                 try {
-                    //使用自定义的ClassLoader加载类，并调用printVersion方法。
+                    // 使用自定义的ClassLoader加载类，并调用printVersion方法。注意一定得显式调用myClassLoader加载，
+                    // 否则会调用默认的AppClassLoader加载并实例化类。
+                    // BTW，整个项目我用的是jdk1.8，（因此）直接用类来调用newInstance()这种方式没有被抛弃
                     Object o = myClassLoader.loadClass(className).newInstance();
+                    // 下面两种写法应该都可以。但后面那一种有点多此一举，有两次类加载
                     o.getClass().getMethod("printVersion").invoke(o);
+                    //myClassLoader.loadClass(className).getMethod("printVersion").invoke(o);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
