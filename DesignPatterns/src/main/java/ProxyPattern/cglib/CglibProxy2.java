@@ -29,7 +29,7 @@ public class CglibProxy2 {
             /*
             * 下面这种方式会发生无限的循环调用，因为invoke中调用的任何原代理类方法，均会重新代理到invoke方法中
             * Object o = method.invoke(obj,args);
-            * 这是因为参数obj传错了，obj对应的是。应该是target，即被代理对象，或说目标对象的实例。改成下面这种就没问题了：
+            * 这是因为参数obj传错了，obj对应的是this即enhancer实例。应该是target，即被代理对象，或说目标对象的实例。改成下面这种就没问题了：
             * Object o = method.invoke(target,args);
             * 见下面的个体Proxy方法
             * */
