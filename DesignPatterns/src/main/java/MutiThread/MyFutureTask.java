@@ -1,7 +1,11 @@
 package MutiThread;
 
 import AdaptorPattern.RunnableAdaptor;
+
+import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.Callable;
+import java.util.concurrent.DelayQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 
 /**
  * 感觉这个很牛逼啊，同时适配了Runnable和Callable。
@@ -23,7 +27,7 @@ public class MyFutureTask<T> implements Runnable{
     @Override
     public void run() {
         try {
-            callable.call();
+            T call = callable.call();
         } catch (Exception e) {
             e.printStackTrace();
         }

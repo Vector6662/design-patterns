@@ -8,6 +8,7 @@ public class Configuration {
     protected Map<String, String> dataSource;
     protected Map<String, XNode> mapperElement;
 
+    // getter and setter
     public Connection getConnection() {
         return connection;
     }

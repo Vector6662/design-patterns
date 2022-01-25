@@ -39,7 +39,7 @@ public class ConditionQueue<T> {
             while (queue.size()>=capacity){
                 logger.warn("队列已满，生产者不能再放入资源");
                 // 将当前线程挂起在生产者队列中，并释放CPU使用权。但是要注意的是当它再次被唤醒它不会从头开始执行，而是接着这里，也就是挂起的地方继续执行！！！
-                // 这就是为什么要用while循环的原因了！还是那个如果这个线程接着此处继续执行，还是需要判断一下队列是否装满，如果仍然装满又需要再次挂起。
+                // 这就是为什么要用while循环的原因了！如果这个线程接着此处继续执行，还是需要判断一下队列是否装满，如果仍然装满又需要再次挂起。
                 // 翻译翻译这个await()的文档：Causes the current thread to wait until it is signalled or interrupted. 让当前线程等待，直到被signal或interrupted。
                 // 其实就是将当前线程（关键词：当前）注册到这个condition中，这样之后就可以实现选择性地signal一个condition中的线程。
                 // 如果和synchronized统一起来看，synchronized相当于只有一个condition的lock，所有的挂起线程都在一个condition里边。

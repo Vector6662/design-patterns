@@ -20,7 +20,7 @@ public class WaitNotifyQueue<T> {
     }
 
     public synchronized void put(T resource) throws InterruptedException {
-        // 注意一个关键点：此时生产者线程是拿到了对象的锁的！拿到锁之后才有资格执行这个while循环，然后试探能否插入数据到队列中
+        // 注意一个关键点：此时生产者线程是拿到了对象的锁(monitor)的！拿到锁之后才有资格执行这个while循环，然后试探能否插入数据到队列中
         while (queue.size()>= capacity) {
             logger.warn("队列已满，生产者不能再放入资源");
             // 这里应该是阻塞整个生产者队列了，释放了CPU使用权，线程挂起。

@@ -9,7 +9,8 @@ import org.slf4j.LoggerFactory;
 public class Main {
     private static final Logger logger = LoggerFactory.getLogger(Main.class);
     public static void main(String[] args) {
-        for (int i=0;i<100;i++){new Thread(new Runnable() {
+        for (int i=0;i<100;i++){
+            new Thread(new Runnable() {
                 @Override
                 public void run() {
                     Singleton1 singleton1 = Singleton1.getInstance();

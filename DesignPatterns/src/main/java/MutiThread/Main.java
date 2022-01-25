@@ -20,11 +20,12 @@ import java.util.concurrent.*;
 public class Main {
     public static final Logger logger = LoggerFactory.getLogger(Main.class);
 
-    /**
-     * 三种多线程的实现方式
-     */
-    public static void main(String[] args) throws ExecutionException, InterruptedException {
 
+    public static void main(String[] args) throws ExecutionException, InterruptedException {
+        /**
+         * 下边是四种多线程的实现方式。
+         * 第一种方式并不推荐，它不是一个很好的设计。现在的多线程实现思想中，应该将任务和线程解耦，以更好地利用线程池
+         */
         /*
         * 方式一：直接重写Thread的run方法。
         * 看Thread的源码可以发现，run()方法体中有个target.run()，你懂我意思吧
@@ -37,19 +38,20 @@ public class Main {
         }.start();
 
         /*
-        * 方式二：传递Runnable。同时注意这是一个函数，可以使用lambda表达式
+        * 方式二：传递Runnable。可以使用lambda表达式
+        * 较为先进的设计，任务（即这里的Runnable）和线程(Thread)分离开来
         * */
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                System.out.println(Thread.currentThread().getName() + "========>正在执行");
-            }
-        }).start();
+        Runnable runnableTask = () -> System.out.println(Thread.currentThread().getName() + "========>正在执行");
+        new Thread(runnableTask).start();
+
+
+        // FIXME: 2021/10/20 思考一个问题，thread直接调用run不行吗，为啥要调用start？考虑好了可看答案：
+        // https://snailclimb.gitee.io/javaguide/#/docs/java/multi-thread/Java%E5%B9%B6%E5%8F%91%E5%9F%BA%E7%A1%80%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98%E6%80%BB%E7%BB%93?id=_10-%e4%b8%ba%e4%bb%80%e4%b9%88%e6%88%91%e4%bb%ac%e8%b0%83%e7%94%a8-start-%e6%96%b9%e6%b3%95%e6%97%b6%e4%bc%9a%e6%89%a7%e8%a1%8c-run-%e6%96%b9%e6%b3%95%ef%bc%8c%e4%b8%ba%e4%bb%80%e4%b9%88%e6%88%91%e4%bb%ac%e4%b8%8d%e8%83%bd%e7%9b%b4%e6%8e%a5%e8%b0%83%e7%94%a8-run-%e6%96%b9%e6%b3%95%ef%bc%9f
 
 
         /*
         * 方式三：FutureTask
-        * 这种方式其实是方式二的变体，因为FutureTask实现了Runnable接口
+        * 方式二的优化，同时适配两种类型的任务：Runnable和Callable
         * */
         FutureTask<String> task = new FutureTask<>(new Callable<String>() {
             @Override
@@ -72,13 +74,10 @@ public class Main {
         * 方式四：线程池
         * */
         ExecutorService executorService = Executors.newSingleThreadExecutor();
-        Future<String> submit = executorService.submit(new Callable<String>() {
-            @Override
-            public String call() throws Exception {
-                System.out.println(Thread.currentThread().getName() + "========>正在执行");
-                Thread.sleep(3 * 1000L);
-                return "方式四返回结果";
-            }
+        Future<String> submit = executorService.submit(() -> {
+            System.out.println(Thread.currentThread().getName() + "========>正在执行");
+            Thread.sleep(3 * 1000L);
+            return "方式四返回结果";
         });
         String result1 = submit.get();
         System.out.println("result=======>" + result1);
@@ -98,6 +97,8 @@ public class Main {
             }
         },"success");
         new Thread(f).start();
+
+
 
     }
 

@@ -10,23 +10,25 @@ public class Main {
 
         for (int i=0;i<20;i++){
             int finalI = i;
-            new Thread(() -> {
+            Runnable task1 = () -> {
                 try {
                     queue.put(finalI);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-            }).start();
+            };
+            new Thread(task1).start();
         }
         for (int i=0;i<10;i++){
             Thread.sleep(1000);
-            new Thread(() -> {
+            Runnable task2 = () -> {
                 try {
                     queue.take();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-            }).start();
+            };
+            new Thread(task2).start();
         }
 
     }

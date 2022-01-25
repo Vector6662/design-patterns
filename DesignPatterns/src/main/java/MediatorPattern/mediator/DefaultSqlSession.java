@@ -1,8 +1,5 @@
 package MediatorPattern.mediator;
 
-import org.springframework.beans.factory.BeanFactory;
-import org.springframework.beans.factory.FactoryBean;
-
 import java.lang.reflect.Method;
 import java.sql.*;
 import java.util.ArrayList;
@@ -21,7 +18,7 @@ public class DefaultSqlSession implements SqlSession {
 
     @Override
     public <T> T selectOne(String statement) {
-        // TODO: 2020/11/28 验证这么些科学否，可以直接这么强制转换类型否？
+        // TODO: 2020/11/28 验证这么些科学否，可以直接这么强制转换类型否？可以最泛型做出限制，<T extends Xxx>？
         return (T) selectList(statement).get(0);
     }
 
