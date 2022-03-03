@@ -13,16 +13,12 @@ public class CASQueue<T>{
     LinkedList<T> queue = new LinkedList<>();
 
     public void put(T t){
-        if(capacity.compareAndSet(capacity.get(), capacity.get()+1)){
-            queue.addFirst(t);
-        }
+        while(!capacity.compareAndSet(capacity.get(), capacity.get()+1));
+        queue.addFirst(t);
     }
     public T take(){
-        T t = null;
-        if(capacity.compareAndSet(capacity.get(), capacity.get()-1)){
-            t = queue.removeLast();
-        }
-        return t;
+        while (!capacity.compareAndSet(capacity.get(), capacity.get()-1));
+        return queue.removeLast();
     }
 
 

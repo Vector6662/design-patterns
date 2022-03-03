@@ -35,6 +35,7 @@ public class DynamicProxy2 {
         * 请注意，这个方法（newProxyInstance）返回的是代理对象，而不是target自己！！！这两者是不一样的哦！！！
         * */
         return (T) Proxy.newProxyInstance(
+                //我觉得这里选择三个基本的ClassLoader都是可以的，因为遵循双亲委派模型。但是如果是自定义的ClassLoader并且重写了loaderClass()，那就是另一会事了
                 target.getClass().getClassLoader(),
                 target.getClass().getInterfaces(),
                 (proxy, method, args) -> {
