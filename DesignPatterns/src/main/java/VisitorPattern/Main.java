@@ -17,15 +17,15 @@ public class Main {
         FileStructure fs = new FileStructure(file);
         JavaFileVisitor visitor1 = new JavaFileVisitor();
         ClassFileVisitor visitor2 = new ClassFileVisitor();
+        fs.handle(visitor1);
         fs.handle(visitor2);
 
         //尝试使用函数式编程
         System.out.println("================函数式编程=================");
-        fs.handle(file,(i)->{
+        fs.handle(file,(i)->{//相当于是实现Visitor接口，但又不全是，因为这里的Visitor接口有两个方法，functionalinterface只能是一个方法
             if (i.getName().endsWith(".class")){
                 System.out.println("found java file:"+i);
             }
-
         });
 
     }

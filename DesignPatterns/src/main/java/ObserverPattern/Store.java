@@ -25,6 +25,8 @@ public class Store implements Observable {
     public void addNewProduct(String name,double price){
         Product p = new Product(name,price);
         products.put(name,p);
+        //通知
+        // TODO: 2022/3/18 这是观察者模式高耦合的地方，也就是业务代码中还得维护观察者列表，其实是很不友好的
         observers.forEach(observer -> observer.onEvent(new Event<>("NewProduct", p)));
     }
     public void setProductPrice(String name, double price) {

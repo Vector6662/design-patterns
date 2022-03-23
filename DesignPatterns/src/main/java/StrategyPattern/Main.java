@@ -25,6 +25,7 @@ public class Main {
         Context<Double> context = new Context<>();
 
         // 采用直减策略
+        //默认直减ZJCouponDiscount
         BigDecimal discountAmount = context.discountAmount(10D,new BigDecimal(100));
         logger.info("测试结果：直减优惠后金额{}",discountAmount);
 

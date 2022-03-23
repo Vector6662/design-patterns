@@ -22,17 +22,6 @@ public class FileStructure {
         scan(this.path,visitor);
     }
 
-    public void handle(File file, Consumer<File> consumer){
-        if(file.isDirectory()) {
-            consumer.accept(file);
-            for (File subFile:file.listFiles()){
-                handle(subFile, consumer);
-            }
-        } else if (file.isFile()) {
-            consumer.accept(file);
-        }
-    }
-
     /**
      * 这里的业务逻辑也很简单：拿到visitor想要的数据（file）后交给visitor
      * @param file
@@ -64,6 +53,17 @@ public class FileStructure {
             }
         } else if (file.isFile()) {
             visitor.visitFile(file);
+        }
+    }
+
+    public void handle(File file, Consumer<File> consumer){
+        if(file.isDirectory()) {
+            consumer.accept(file);
+            for (File subFile:file.listFiles()){
+                handle(subFile, consumer);
+            }
+        } else if (file.isFile()) {
+            consumer.accept(file);
         }
     }
 
