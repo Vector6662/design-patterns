@@ -1,12 +1,8 @@
 package BlockingQueue;
 
-import java.util.concurrent.Callable;
-import java.util.concurrent.Future;
-import java.util.concurrent.FutureTask;
-
 public class Main {
     public static void main(String[] args) throws InterruptedException {
-        ConditionQueue queue = new ConditionQueue(10);
+        BlockingQueue<Integer> queue = new ConditionQueue<Integer>(10);
 
         for (int i=0;i<20;i++){
             int finalI = i;

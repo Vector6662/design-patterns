@@ -10,7 +10,9 @@ public class Customer implements Observer {
     public <T> void onEvent(Event<T> event) {
         String name = event.getEvent();
         T t = event.getObj();
-        // TODO: 2021/4/7  业务逻辑
+        /*
+        业务逻辑...
+         */
         log.info("customer:{}  {}",name,t);
     }
 }

@@ -8,7 +8,7 @@ import java.util.LinkedList;
 /**
  * 参考文章：https://www.yuque.com/books/share/2b434c74-ed3a-470e-b148-b4c94ba14535/gertlc#g6CMS
  */
-public class WaitNotifyQueue<T> {
+public class WaitNotifyQueue<T> implements BlockingQueue<T> {
     private static final Logger logger = LoggerFactory.getLogger(WaitNotifyQueue.class);
     private LinkedList<T> queue = new LinkedList<>();
     private int capacity;

@@ -8,7 +8,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * 参考：http://blog.fnil.net/blog/9e79a8ed3855334b76d924f796be47be/
  * @param <T>
  */
-public class CASQueue<T>{
+public class CASQueue<T> implements BlockingQueue<T>{
     AtomicInteger state = new AtomicInteger(0);
     LinkedList<T> queue = new LinkedList<>();
 

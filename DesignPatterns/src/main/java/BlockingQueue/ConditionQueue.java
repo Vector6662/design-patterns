@@ -6,7 +6,7 @@ import java.util.LinkedList;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
 
-public class ConditionQueue<T> {
+public class ConditionQueue<T> implements BlockingQueue<T> {
     private final static Logger logger = LoggerFactory.getLogger(ConditionQueue.class);
 
     private LinkedList<T> queue = new LinkedList<>();
