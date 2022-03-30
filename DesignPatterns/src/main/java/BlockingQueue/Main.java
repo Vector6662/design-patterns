@@ -2,7 +2,7 @@ package BlockingQueue;
 
 public class Main {
     public static void main(String[] args) throws InterruptedException {
-        BlockingQueue<Integer> queue = new ConditionQueue<Integer>(10);
+        BlockingQueue<Integer> queue = new WaitNotifyQueue<Integer>(8);
 
         for (int i=0;i<20;i++){
             int finalI = i;

@@ -1,4 +1,4 @@
-package 核弹试验场;
+package ProxyPattern;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;

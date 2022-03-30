@@ -13,6 +13,11 @@ public class WaitNotifyQueue<T> implements BlockingQueue<T> {
     private LinkedList<T> queue = new LinkedList<>();
     private int capacity;
 
+    public WaitNotifyQueue(int capacity){
+        queue=new LinkedList<>();
+        this.capacity=capacity;
+    }
+
     public synchronized void setCapacity(int capacity){
         if (capacity<=0)
              throw new IllegalArgumentException("容量最小值为0");
